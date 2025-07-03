@@ -4,10 +4,10 @@ import json
 from pathlib import Path
 
 # FastAPI Application
-my_app = FastAPI()
+myapp = FastAPI()
 
 # Allow the frontend to access to the API
-my_app.add_middleware (
+myapp.add_middleware (
     CORSMiddleware,
     allow_origins = ["*"],
     allow_credentials = True,
@@ -19,7 +19,7 @@ my_app.add_middleware (
 CAM_DATA = []
 DENM_DATA = []
 
-@my_app.on_event("startup")
+@myapp.on_event("startup")
 def load_data() :
     global CAM_DATA, DENM_DATA
     with open(Path("data/CAM.json"), "r", encoding="utf-8") as f :
@@ -29,21 +29,27 @@ def load_data() :
         DENM_DATA = [json.loads(line) for line in f]
 
 #CAM messages
-@my_app.get("/api/cam")
+@myapp.get("/api/cam")
 def get_cam() : 
     return CAM_DATA
 
 #DENM messages
-@my_app.get("/api/denm")
+@myapp.get("/api/denm")
 def get_denm() : 
     return DENM_DATA
 
 #To test
-@my_app.get("/api/cam/sample")
+@myapp.get("/api/cam/sample")
 def get_sample_cam():
     return DENM_DATA[:7] 
 
 # To avoid errors
-@my_app.get("/favicon.ico")
+@myapp.get("/favicon.ico")
 def favicon():
     return {}
+
+@myapp.get("/api/cam/alerts")
+def get_alerts():
+    with open("./data/CAM_Alert.json", "r", encoding="utf-8") as f:
+        return [json.loads(line) for line in f]
+

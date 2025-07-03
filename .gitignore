@@ -1,2 +1,3 @@
 # Ne jamais versionner les gros fichiers
 backend/data/*.json
+!backend/data/CAM-sample.json
