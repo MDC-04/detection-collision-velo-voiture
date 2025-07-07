@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import json
 from pathlib import Path
+from fastapi import HTTPException
 
 # FastAPI Application
 myapp = FastAPI()
@@ -52,4 +53,16 @@ def favicon():
 def get_alerts():
     with open("./data/CAM_Alert.json", "r", encoding="utf-8") as f:
         return [json.loads(line) for line in f]
+
+@myapp.get("/api/cam/alerts/{alert_type}")
+def get_alerts_by_type(alert_type: str):
+    alert_type_upper = alert_type.upper()  # ex: car_behind → CAR_BEHIND
+    file_path = f"./data/CAM_{alert_type_upper}.json"
+
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            return [json.loads(line) for line in f]
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail=f"Fichier CAM_{alert_type_upper}.json introuvable.")
+
 
