@@ -1,0 +1,8 @@
+.sidebar {
+    width: 20vw;
+    height: 100vh;
+    background-color: white;
+    padding: 2vh;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
