@@ -12,6 +12,12 @@ const getAlertColor = (alertType: string): string => {
       return "blue";
     case "CYCLIST_AHEAD":
       return "black";
+    case "CAR_BEHIND_OFF":
+      return "grey";
+    case "BUS_BEHIND_OFF":
+      return "purple";
+    case "CYCLIST_AHEAD_OFF":
+      return "green"
     default:
       return "none";
   }

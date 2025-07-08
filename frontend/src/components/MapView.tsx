@@ -6,7 +6,7 @@ export default function MapView() {
   const [alerts, setAlerts] = useState<any[]>([]);
 
   // Alert types to charge
-  const alertTypes = ["car_behind", "bus_behind", "cyclist_ahead"];
+  const alertTypes = ["car_behind", "bus_behind", "cyclist_ahead", "car_behind_off", "bus_behind_off", "cyclist_ahead_off"];
 
   useEffect(() => {
     const fetchAllAlerts = async () => {
