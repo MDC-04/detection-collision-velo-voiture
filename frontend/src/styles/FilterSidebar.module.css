@@ -16,9 +16,9 @@
 }
 
 .sectionTitle {
-    font-size: 1.8vh;
+    font-size: 2.8vh;
     font-weight: bold;
-    margin-top: 2vh;
+    margin-top: 14vh;
     margin-bottom: 1vh;
 }
   
@@ -27,4 +27,46 @@
     flex-direction: column;
     gap: 1vh;
 }
+
+.dropdownGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    margin-bottom: 2vh;
+  }
+  
+.selectInput {
+    font-size: 1.7vh;
+    padding: 0.5vh;
+}
+  
+.button {
+    font-size: 1.7vh;
+    padding: 0.8vh 1.5vh;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 0.5vh;
+    cursor: pointer;
+    margin-top: 1vh;
+    transition: background-color 0.3s;
+}
+  
+.button:hover {
+    background-color: #125aa1;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    margin-bottom: 2vh;
+}
+  
+.inputField {
+    font-size: 1.7vh;
+    padding: 0.5vh;
+}
+  
+  
   

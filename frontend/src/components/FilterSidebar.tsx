@@ -1,48 +1,41 @@
-import React, { useState } from "react";
-import styles from '@/styles/FilterSidebar.module.css'
+import { useState } from "react";
+import styles from "@/styles/FilterSidebar.module.css";
 
-type Props = {
-    children?: React.ReactNode;
-};
+interface Props {
+  onSearch: (alertType: string) => void;
+}
 
-const alertTypes = [
-    "BUS_BEHIND",
-    "CAR_BEHIND",
-    "BUS_BEHIND_OFF",
-    "CAR_BEHIND_OFF",
-    "CYCLIST_AHEAD",
-    "CYCLIST_AHEAD_OFF"
-];
+export default function FilterSidebar({ onSearch }: Props) {
+  const [alertType, setAlertType] = useState<string>("");
 
-export default function FilterSidebar({ children }: Props) {
-    const [selectedAlerts, setSelectedAlerts] = useState<string[]>([]);
+  const handleSearch = () => {
+    if (alertType) onSearch(alertType);
+  };
 
-    const handleAlertChange = (alert: string) => {
-        setSelectedAlerts((prev) =>
-            prev.includes(alert)
-            ? prev.filter((a) => a != alert)
-            : [...prev, alert]
-        );
-    };
+  return (
+    <div className={styles.sidebar}>
+      <h1 className={styles.title}>Filtres</h1>
 
-    return (
-        <div className={styles.sidebar}>
-            <h3 className={styles.title}>Filtres</h3>
-            
-            <div>
-                <div className={styles.sectionTitle}>Type d'alerte</div>
-                <div className={styles.checkboxGroup}>
-                    {alertTypes.map((alert) => (
-                        <label key={alert}>
-                            <input
-                                type="checkbox"
-                                checked={selectedAlerts.includes(alert)}
-                            />
-                            {alert}
-                        </label>
-                    ))}
-                </div>
-            </div>
-        </div>
-    );
+      <div className={styles.filterGroup}>
+        <label htmlFor="alertType">Type d’alerte</label>
+        <select
+          id="alertType"
+          value={alertType}
+          onChange={(e) => setAlertType(e.target.value)}
+        >
+          <option value="">-- Sélectionner --</option>
+          <option value="CAR_BEHIND">CAR_BEHIND</option>
+          <option value="BUS_BEHIND">BUS_BEHIND</option>
+          <option value="CAR_BEHIND_OFF">CAR_BEHIND_OFF</option>
+          <option value="BUS_BEHIND_OFF">BUS_BEHIND_OFF</option>
+          <option value="CYCLIST_AHEAD">CYCLIST_AHEAD</option>
+          <option value="CYCLIST_AHEAD_OFF">CYCLIST_AHEAD_OFF</option>
+        </select>
+      </div>
+
+      <button onClick={handleSearch} className={styles.searchButton}>
+        Chercher
+      </button>
+    </div>
+  );
 }
