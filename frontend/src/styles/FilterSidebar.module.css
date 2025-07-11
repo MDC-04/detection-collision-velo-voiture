@@ -6,3 +6,25 @@
     overflow-y: auto;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
+
+.title {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 5.2vh;
+    font-weight: bolder;
+    margin-top: 4vh;
+}
+
+.sectionTitle {
+    font-size: 1.8vh;
+    font-weight: bold;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+}
+  
+.checkboxGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+  
