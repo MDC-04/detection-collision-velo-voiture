@@ -1,0 +1,27 @@
+.markerBase {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 6px currentColor;
+  }
+  
+  .red {
+    background-color: red;
+    color: red;
+  }
+  
+  .blue {
+    background-color: blue;
+    color: blue;
+  }
+  
+  .green {
+    background-color: green;
+    color: green;
+  }
+  
+  .gray {
+    background-color: gray;
+    color: gray;
+  }
+  

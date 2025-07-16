@@ -1,25 +1,32 @@
-import { CircleMarker, Popup } from 'react-leaflet';
+import { CircleMarker, Popup } from "react-leaflet";
 
-type Props = {
+interface Props {
   alerts: any[];
-};
+}
 
 const getAlertColor = (alertType: string): string => {
   switch (alertType) {
     case "CAR_BEHIND":
-      return "red";
-    case "BUS_BEHIND":
-      return "blue";
-    case "CYCLIST_AHEAD":
-      return "black";
     case "CAR_BEHIND_OFF":
-      return "grey";
+    case "CAR_OVERTAKING":
+    case "CAR_OVERTAKING_OFF":
+    case "CAR_OVERTAKING_DANGER_OFF":
+      return "red";
+
+    case "BUS_BEHIND":
     case "BUS_BEHIND_OFF":
-      return "purple";
+    case "BUS_OVERTAKING":
+    case "BUS_OVERTAKING_OFF":
+      return "blue";
+
+    case "CYCLIST_AHEAD":
     case "CYCLIST_AHEAD_OFF":
-      return "green"
+    case "CYCLIST_AHEAD_DANGER":
+    case "CYCLIST_AHEAD_DANGER_OFF":
+      return "green";
+
     default:
-      return "none";
+      return "gray";
   }
 };
 
@@ -40,17 +47,16 @@ export default function AlertMarkers({ alerts }: Props) {
           <CircleMarker
             key={index}
             center={[lat, lon]}
-            radius={4}
-            fillColor={color}
-            color={color}
-            weight={0}
-            fillOpacity={1}
+            radius={alerts.length < 100 ? 8 : 4}
+            pathOptions={{ color, fillColor: color, fillOpacity: 1 }}
           >
-            <Popup>
-              <strong>{alertType}</strong>
-              <br />
-              Station ID : {alert.message?.station_id}
-            </Popup>
+            {alerts.length < 500 && (
+              <Popup>
+                <strong>{alertType}</strong>
+                <br />
+                Station ID : {alert.message?.station_id}
+              </Popup>
+            )}
           </CircleMarker>
         );
       })}

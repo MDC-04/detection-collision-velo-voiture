@@ -1,16 +1,23 @@
-import dynamic from "next/dynamic";
-import FilterSidebar from "@/components/FilterSidebar";
+// src/pages/index.tsx
 import { useState } from "react";
-
+import FilterSidebar from "@/components/FilterSidebar";
+import dynamic from "next/dynamic";
 const MapView = dynamic(() => import("@/components/MapView"), { ssr: false });
 
-export default function Home() {
-  const [selectedAlert, setSelectedAlert] = useState<string | null>(null);
+
+export default function HomePage() {
+  const [filters, setFilters] = useState<{
+    alertType?: string;
+    stationId?: string;
+  }>({});
 
   return (
     <div style={{ display: "flex" }}>
-      <FilterSidebar onSearch={(alert) => setSelectedAlert(alert)} />
-      <MapView selectedAlert={selectedAlert} />
+      <FilterSidebar onSearch={setFilters} />
+      <MapView
+        selectedAlert={filters.alertType || null}
+        stationId={filters.stationId || ""}
+      />
     </div>
   );
 }
