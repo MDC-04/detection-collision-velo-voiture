@@ -1,3 +1,4 @@
+// src/components/FilterSidebar.tsx
 import { useState } from "react";
 import styles from "@/styles/FilterSidebar.module.css";
 
@@ -20,14 +21,15 @@ export default function FilterSidebar({ onSearch }: Props) {
     <div className={styles.sidebar}>
       <h1 className={styles.title}>Filtres</h1>
 
-      <div className={styles.filterGroup}>
-        <label htmlFor="alertType">Type d’alerte</label>
+      <div className={styles.dropdownGroup}>
+        <label htmlFor="alertType" className={styles.sectionTitle}>Type d’alerte</label>
         <select
           id="alertType"
           value={alertType}
           onChange={(e) => setAlertType(e.target.value)}
+          className={styles.selectInput}
         >
-          <option value="">-- Toutes --</option>
+          <option value="">-- Toutes les alertes --</option>
           <option value="CAR_BEHIND">CAR_BEHIND</option>
           <option value="CAR_BEHIND_OFF">CAR_BEHIND_OFF</option>
           <option value="CAR_OVERTAKING">CAR_OVERTAKING</option>
@@ -44,18 +46,19 @@ export default function FilterSidebar({ onSearch }: Props) {
         </select>
       </div>
 
-      <div className={styles.filterGroup}>
-        <label htmlFor="stationId">Station ID</label>
+      <div className={styles.inputGroup}>
+        <label htmlFor="stationId" className={styles.sectionTitle}>Station ID</label>
         <input
           id="stationId"
           type="number"
-          placeholder="ex: 1010"
+          placeholder="Taper le numéro du station_ID"
           value={stationId}
           onChange={(e) => setStationId(e.target.value)}
+          className={styles.inputField}
         />
       </div>
 
-      <button onClick={handleSearch} className={styles.searchButton}>
+      <button onClick={handleSearch} className={styles.button}>
         Chercher
       </button>
     </div>

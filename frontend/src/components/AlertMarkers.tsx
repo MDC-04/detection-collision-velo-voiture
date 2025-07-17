@@ -1,4 +1,5 @@
 import { CircleMarker, Popup } from "react-leaflet";
+import styles from "@/styles/AlertMarkers.module.css"
 
 interface Props {
   alerts: any[];
@@ -50,12 +51,23 @@ export default function AlertMarkers({ alerts }: Props) {
             radius={alerts.length < 100 ? 8 : 4}
             pathOptions={{ color, fillColor: color, fillOpacity: 1 }}
           >
-            {alerts.length < 500 && (
+            {(
               <Popup>
-                <strong>{alertType}</strong>
-                <br />
-                Station ID : {alert.message?.station_id}
+                <div className={styles.popupContainer}>
+                  <div><strong>Type :</strong> {alertType}</div>
+                  <div><strong>Station ID :</strong> {alert.message?.station_id}</div>
+                  <div><strong>Vitesse :</strong> {alert.message?.high_frequency_container?.speed ?? "?"} cm/s</div>
+                  <div><strong>Direction :</strong> {alert.message?.high_frequency_container?.heading ?? "?"}°</div>
+                  <div><strong>Horodatage :</strong> {
+                    new Date(alert.timestamp).toLocaleTimeString("fr-FR", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    })
+                  }</div>
+                </div>
               </Popup>
+            
             )}
           </CircleMarker>
         );

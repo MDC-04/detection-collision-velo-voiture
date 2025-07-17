@@ -24,4 +24,19 @@
     background-color: gray;
     color: gray;
   }
+
+  .popupContainer {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .popupContainer strong {
+    color: #222;
+  }
+  
   

@@ -1,6 +1,7 @@
 // src/pages/index.tsx
 import { useState } from "react";
 import FilterSidebar from "@/components/FilterSidebar";
+import Legend from "@/components/Legend";
 import dynamic from "next/dynamic";
 const MapView = dynamic(() => import("@/components/MapView"), { ssr: false });
 
@@ -18,6 +19,7 @@ export default function HomePage() {
         selectedAlert={filters.alertType || null}
         stationId={filters.stationId || ""}
       />
+      {filters.stationId && !filters.alertType && <Legend />}
     </div>
   );
 }
