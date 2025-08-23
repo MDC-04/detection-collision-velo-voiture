@@ -1,0 +1,12 @@
+# .gitignore
+
+# Gros fichiers à exclure
+web/backend/data/CAM.json
+*.csv
+*.pkl
+*.json
+
+# Dossiers temporaires
+__pycache__/
+*.pyc
+.env

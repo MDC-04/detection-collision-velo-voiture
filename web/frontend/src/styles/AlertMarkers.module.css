@@ -1,0 +1,42 @@
+.markerBase {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 6px currentColor;
+  }
+  
+  .red {
+    background-color: red;
+    color: red;
+  }
+  
+  .blue {
+    background-color: blue;
+    color: blue;
+  }
+  
+  .green {
+    background-color: green;
+    color: green;
+  }
+  
+  .gray {
+    background-color: gray;
+    color: gray;
+  }
+
+  .popupContainer {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .popupContainer strong {
+    color: #222;
+  }
+  
+  

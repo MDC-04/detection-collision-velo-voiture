@@ -1,0 +1,83 @@
+.sidebar {
+    width: 20vw;
+    height: 100vh;
+    background-color: white;
+    padding: 2vh;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    
+}
+
+.title {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 5.2vh;
+    font-weight: bolder;
+    margin-top: 4vh;
+}
+
+.sectionTitle {
+    font-size: 2.8vh;
+    font-weight: bold;
+    margin-top: 14vh;
+    margin-bottom: 0vh;
+}
+
+.checkboxGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.dropdownGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    margin-bottom: 1.5vh; 
+}
+
+.selectInput {
+    font-size: 1.7vh;
+    padding: 0.5vh;
+}
+
+.button {
+    width: 15vw;
+    font-size: 1.7vh;
+    padding: 0.8vh 1.5vh;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 0.5vh;
+    cursor: pointer;
+    margin-top: 10vh;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #125aa1;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    margin-bottom: 1.5vh; /* réduit */
+}
+
+.inputField {
+    font-size: 1.7vh;
+    padding: 0.5vh;
+}
+
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4vh; 
+    margin-bottom: 1.5vh; 
+}
+
+.searchButton {
+    composes: button;
+    align-self: flex-start;
+}
