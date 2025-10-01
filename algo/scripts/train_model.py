@@ -11,7 +11,7 @@ MODEL_PATH = os.path.join(BASE_DIR, "models", "collision_model.pkl")
 
 df = pd.read_csv(DATA_PATH)
 
-features = ["distance_m", "speed_1", "speed_2", "heading_1", "heading_2"]
+features = ["distance_m", "speed_1", "speed_2", "heading_1", "heading_2", "lat_1", "lon_1", "lat_2", "lon_2"]
 X = df[features]
 y = df["collision"]
 

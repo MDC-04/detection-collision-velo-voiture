@@ -3,30 +3,25 @@ import AlertMarkers from "./AlertMarkers";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
-import styles from "@/styles/LoadingSpinner.module.css"
+import styles from "@/styles/LoadingSpinner.module.css";
 
 interface Props {
   selectedAlert?: string;
   stationId?: string;
 }
 
-const alertColorMap: Record<string, string> = {
-  CAR_BEHIND: "red",
-  CAR_BEHIND_OFF: "red",
-  CAR_OVERTAKING: "red",
-  CAR_OVERTAKING_OFF: "red",
-  CAR_OVERTAKING_DANGER_OFF: "red",
-  BUS_BEHIND: "blue",
-  BUS_BEHIND_OFF: "blue",
-  BUS_OVERTAKING: "blue",
-  BUS_OVERTAKING_OFF: "blue",
-  CYCLIST_AHEAD: "green",
-  CYCLIST_AHEAD_OFF: "green",
-  CYCLIST_AHEAD_DANGER: "green",
-  CYCLIST_AHEAD_DANGER_OFF: "green",
-};
+const camAlertTypes = [
+  "CAR_BEHIND", "CAR_BEHIND_OFF", "CAR_OVERTAKING", "CAR_OVERTAKING_OFF", "CAR_OVERTAKING_DANGER_OFF",
+  "BUS_BEHIND", "BUS_BEHIND_OFF", "BUS_OVERTAKING", "BUS_OVERTAKING_OFF",
+  "CYCLIST_AHEAD", "CYCLIST_AHEAD_OFF", "CYCLIST_AHEAD_DANGER", "CYCLIST_AHEAD_DANGER_OFF",
+];
 
-const allAlertTypes = Object.keys(alertColorMap);
+const denmAlertTypes = [
+  "VULNERABLE_ROAD_USER", "VULNERABLE_ROAD_USER_OFF",
+  "INCREASED_VOLUME_OF_TRAFFIC_OFF", "SCHOOL_AREA", "SCHOOL_AREA_OFF"
+];
+
+const allAlertTypes = [...camAlertTypes, ...denmAlertTypes];
 
 export default function MapView({ selectedAlert, stationId }: Props) {
   const [alerts, setAlerts] = useState<any[]>([]);
@@ -34,12 +29,10 @@ export default function MapView({ selectedAlert, stationId }: Props) {
   const [notFound, setNotFound] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
-
   useEffect(() => {
     const fetchData = async () => {
-      if (selectedAlert || stationId) {
-        setHasSearched(true);
-      }      
+      if (selectedAlert || stationId) setHasSearched(true);
+
       setLoading(true);
       setNotFound(false);
 
@@ -47,20 +40,28 @@ export default function MapView({ selectedAlert, stationId }: Props) {
         let fetchedAlerts: any[] = [];
 
         if (selectedAlert) {
-          const res = await fetch(
-            `http://localhost:8000/api/cam/alert/${selectedAlert}`
-          );
+          const endpoint = camAlertTypes.includes(selectedAlert)
+            ? `http://localhost:8000/api/cam/alert/${selectedAlert}`
+            : `http://localhost:8000/api/denm/alert/${selectedAlert}`;
+
+          const res = await fetch(endpoint);
           fetchedAlerts = await res.json();
         } else if (stationId) {
-          const allResults = await Promise.all(
-            allAlertTypes.map(async (type) => {
-              const res = await fetch(
-                `http://localhost:8000/api/cam/alert/${type}`
-              );
+          const camResults = await Promise.all(
+            camAlertTypes.map(async (type) => {
+              const res = await fetch(`http://localhost:8000/api/cam/alert/${type}`);
               return res.json();
             })
           );
-          fetchedAlerts = allResults.flat();
+
+          const denmResults = await Promise.all(
+            denmAlertTypes.map(async (type) => {
+              const res = await fetch(`http://localhost:8000/api/denm/alert/${type}`);
+              return res.json();
+            })
+          );
+
+          fetchedAlerts = [...camResults.flat(), ...denmResults.flat()];
         }
 
         if (stationId) {
@@ -101,10 +102,7 @@ export default function MapView({ selectedAlert, stationId }: Props) {
           station_id ou alerte inexistente
         </div>
       ) : (
-        <AlertMarkers
-          alerts={alerts}
-          color={selectedAlert ? alertColorMap[selectedAlert] ?? "gray" : "gray"}
-        />
+        <AlertMarkers alerts={alerts} />
       )}
     </MapContainer>
   );

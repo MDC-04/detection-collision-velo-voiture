@@ -66,3 +66,11 @@ def get_alert_by_type(alert_type: str):
         return [json.loads(line) for line in f]
 
 
+@myapp.get("/api/denm/alert/{alert_type}")
+def get_denm_alert_by_type(alert_type: str):
+    filename = f"./data/DENM_{alert_type}.json"
+    if not os.path.exists(filename):
+        raise HTTPException(status_code=404, detail="Fichier non trouvé")
+    
+    with open(filename, "r", encoding="utf-8") as f:
+        return [json.loads(line) for line in f]

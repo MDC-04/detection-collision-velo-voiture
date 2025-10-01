@@ -19,7 +19,7 @@ export default function HomePage() {
         selectedAlert={filters.alertType || null}
         stationId={filters.stationId || ""}
       />
-      {filters.stationId && !filters.alertType && <Legend />}
+      {<Legend />}
     </div>
   );
 }

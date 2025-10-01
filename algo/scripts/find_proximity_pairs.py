@@ -2,7 +2,6 @@ import pandas as pd
 import os
 from math import radians, cos, sin, sqrt, atan2
 
-
 TIME_WINDOW_MS = 1000  # Tolérance temporelle (±1s)
 DISTANCE_THRESHOLD_METERS = 15  # Seuil de proximité spatiale
 
@@ -15,7 +14,6 @@ def haversine(lat1, lon1, lat2, lon2):
     a = sin(d_phi / 2)**2 + cos(phi1) * cos(phi2) * sin(d_lambda / 2)**2
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
     return R * c  
-
 
 def find_proximity_pairs(input_path, output_path):
     df = pd.read_csv(input_path)
@@ -50,6 +48,10 @@ def find_proximity_pairs(input_path, output_path):
                     "speed_2": other["speed"],
                     "heading_1": row["heading"],
                     "heading_2": other["heading"],
+                    "lat_1": lat1,
+                    "lon_1": lon1,
+                    "lat_2": lat2,
+                    "lon_2": lon2
                 })
 
     result_df = pd.DataFrame(pairs)

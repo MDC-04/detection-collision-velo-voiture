@@ -1,4 +1,3 @@
-// src/components/FilterSidebar.tsx
 import { useState } from "react";
 import styles from "@/styles/FilterSidebar.module.css";
 
@@ -30,19 +29,28 @@ export default function FilterSidebar({ onSearch }: Props) {
           className={styles.selectInput}
         >
           <option value="">-- Toutes les alertes --</option>
-          <option value="CAR_BEHIND">CAR_BEHIND</option>
-          <option value="CAR_BEHIND_OFF">CAR_BEHIND_OFF</option>
-          <option value="CAR_OVERTAKING">CAR_OVERTAKING</option>
-          <option value="CAR_OVERTAKING_OFF">CAR_OVERTAKING_OFF</option>
-          <option value="CAR_OVERTAKING_DANGER_OFF">CAR_OVERTAKING_DANGER_OFF</option>
-          <option value="BUS_BEHIND">BUS_BEHIND</option>
-          <option value="BUS_BEHIND_OFF">BUS_BEHIND_OFF</option>
-          <option value="BUS_OVERTAKING">BUS_OVERTAKING</option>
-          <option value="BUS_OVERTAKING_OFF">BUS_OVERTAKING_OFF</option>
-          <option value="CYCLIST_AHEAD">CYCLIST_AHEAD</option>
-          <option value="CYCLIST_AHEAD_OFF">CYCLIST_AHEAD_OFF</option>
-          <option value="CYCLIST_AHEAD_DANGER">CYCLIST_AHEAD_DANGER</option>
-          <option value="CYCLIST_AHEAD_DANGER_OFF">CYCLIST_AHEAD_DANGER_OFF</option>
+          <optgroup label="CAM Alerts">
+            <option value="CAR_BEHIND">CAR_BEHIND</option>
+            <option value="CAR_BEHIND_OFF">CAR_BEHIND_OFF</option>
+            <option value="CAR_OVERTAKING">CAR_OVERTAKING</option>
+            <option value="CAR_OVERTAKING_OFF">CAR_OVERTAKING_OFF</option>
+            <option value="CAR_OVERTAKING_DANGER_OFF">CAR_OVERTAKING_DANGER_OFF</option>
+            <option value="BUS_BEHIND">BUS_BEHIND</option>
+            <option value="BUS_BEHIND_OFF">BUS_BEHIND_OFF</option>
+            <option value="BUS_OVERTAKING">BUS_OVERTAKING</option>
+            <option value="BUS_OVERTAKING_OFF">BUS_OVERTAKING_OFF</option>
+            <option value="CYCLIST_AHEAD">CYCLIST_AHEAD</option>
+            <option value="CYCLIST_AHEAD_OFF">CYCLIST_AHEAD_OFF</option>
+            <option value="CYCLIST_AHEAD_DANGER">CYCLIST_AHEAD_DANGER</option>
+            <option value="CYCLIST_AHEAD_DANGER_OFF">CYCLIST_AHEAD_DANGER_OFF</option>
+          </optgroup>
+          <optgroup label="DENM Alerts">
+            <option value="VULNERABLE_ROAD_USER">VULNERABLE_ROAD_USER</option>
+            <option value="VULNERABLE_ROAD_USER_OFF">VULNERABLE_ROAD_USER_OFF</option>
+            <option value="INCREASED_VOLUME_OF_TRAFFIC_OFF">INCREASED_VOLUME_OF_TRAFFIC_OFF</option>
+            <option value="SCHOOL_AREA">SCHOOL_AREA</option>
+            <option value="SCHOOL_AREA_OFF">SCHOOL_AREA_OFF</option>
+          </optgroup>
         </select>
       </div>
 
